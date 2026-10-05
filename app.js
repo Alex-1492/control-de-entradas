@@ -108,3 +108,15 @@ $("voz").addEventListener("click", function () {
   reconocimiento.interimResults = false;
 
   mensaje("mensaje", "Escuchando... hablá ahora.");
+
+  reconocimiento.onresult = function (evento) {
+    const texto = evento.results[0][0].transcript;
+    interpretarVoz(texto);
+  };
+
+  reconocimiento.onerror = function (evento) {
+    mensaje("mensaje", "Error del micrófono: " + evento.error, true);
+  };
+
+  reconocimiento.start();
+});
