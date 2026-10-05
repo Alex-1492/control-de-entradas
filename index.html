@@ -9,72 +9,81 @@
   <title>Control de Entradas</title>
 </head>
 <body>
-  <main class="contenedor">
-    <h1>Control de Entradas</h1>
+<main class="contenedor">
+  <h1>Control de Entradas</h1>
 
-    <section class="tarjeta">
-      <h2>Nuevo movimiento</h2>
+  <section class="tarjeta">
+    <h2>Nuevo movimiento</h2>
+    <label>Nombre<input id="nombre" type="text"></label>
+    <label>Departamento / piso<input id="departamento" type="text"></label>
+    <label>Tipo de persona
+      <select id="tipo">
+        <option value="residente">Residente</option>
+        <option value="visita">Visita</option>
+      </select>
+    </label>
+    <label>Evento
+      <select id="evento">
+        <option value="salió">Salió</option>
+        <option value="volvió">Volvió</option>
+      </select>
+    </label>
+    <div class="botones">
+      <button id="guardar">Guardar movimiento</button>
+      <button id="voz" class="secundario">🎙️ Registrar por voz</button>
+    </div>
+    <p id="mensaje" class="mensaje"></p>
+  </section>
 
-      <label>Nombre
-        <input id="nombre" type="text" placeholder="Ej.: Juan Pérez">
-      </label>
+  <section class="tarjeta">
+    <h2>📦 Recibir paquete</h2>
+    <label>Empresa
+      <select id="empresa">
+        <option>Mercado Libre</option>
+        <option>Correo Argentino</option>
+        <option>Andreani</option>
+        <option>OCA</option>
+        <option>Otra</option>
+      </select>
+    </label>
+    <label>Destinatario<input id="destinatario" type="text"></label>
+    <label>Piso / departamento<input id="pisoPaquete" type="text"></label>
+    <label>Número de seguimiento (opcional)<input id="seguimiento" type="text"></label>
+    <button id="guardarPaquete">Guardar paquete recibido</button>
+    <p id="mensajePaquete" class="mensaje"></p>
+  </section>
 
-      <label>Departamento
-        <input id="departamento" type="text" placeholder="Ej.: 3B">
-      </label>
+  <section class="tarjeta">
+    <h2>Personas afuera <span id="contador">0</span></h2>
+    <ul id="afuera"></ul>
+  </section>
 
-      <label>Tipo de persona
-        <select id="tipo">
-          <option value="residente">Residente</option>
-          <option value="visita">Visita</option>
-        </select>
-      </label>
+  <section class="tarjeta">
+    <h2>Historial del día</h2>
+    <div class="botones">
+      <button id="pdf">Generar PDF</button>
+      <button id="limpiar" class="peligro">Borrar historial</button>
+    </div>
+    <div class="tabla-contenedor">
+      <table>
+        <thead><tr><th>Hora</th><th>Nombre</th><th>Depto.</th><th>Tipo</th><th>Evento</th></tr></thead>
+        <tbody id="historial"></tbody>
+      </table>
+    </div>
+  </section>
 
-      <label>Evento
-        <select id="evento">
-          <option value="salió">Salió</option>
-          <option value="volvió">Volvió</option>
-        </select>
-      </label>
+  <section class="tarjeta">
+    <h2>Paquetes recibidos hoy</h2>
+    <div class="tabla-contenedor">
+      <table>
+        <thead><tr><th>Hora</th><th>Empresa</th><th>Destinatario</th><th>Piso</th><th>Seguimiento</th></tr></thead>
+        <tbody id="listaPaquetes"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
 
-      <div class="botones">
-        <button id="guardar">Guardar movimiento</button>
-        <button id="voz" class="secundario">🎙️ Registrar por voz</button>
-      </div>
-
-      <p id="mensaje" class="mensaje"></p>
-      <small>Ejemplo de voz: “María López, departamento 4A, visita, salió”.</small>
-    </section>
-
-    <section class="tarjeta">
-      <h2>Personas afuera <span id="contador">0</span></h2>
-      <ul id="afuera"></ul>
-    </section>
-
-    <section class="tarjeta">
-      <h2>Historial del día</h2>
-      <div class="botones">
-        <button id="pdf">Generar PDF</button>
-        <button id="limpiar" class="peligro">Borrar historial</button>
-      </div>
-      <div class="tabla-contenedor">
-        <table>
-          <thead>
-            <tr>
-              <th>Hora</th>
-              <th>Nombre</th>
-              <th>Depto.</th>
-              <th>Tipo</th>
-              <th>Evento</th>
-            </tr>
-          </thead>
-          <tbody id="historial"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

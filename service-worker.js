@@ -1,33 +1,15 @@
-const CACHE = "control-entradas-v1";
+const CACHE="control-entradas-v2";
+const ARCHIVOS=["./","./index.html","./style.css","./app.js","./manifest.json"];
 
-const ARCHIVOS = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./app.js",
-  "./manifest.json"
-];
-
-self.addEventListener("install", evento => {
-  evento.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(ARCHIVOS))
-  );
-  self.skipWaiting();
+self.addEventListener("install",e=>{
+ e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ARCHIVOS)));
+ self.skipWaiting();
 });
-
-self.addEventListener("activate", evento => {
-  evento.waitUntil(self.clients.claim());
+self.addEventListener("activate",e=>{
+ e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
+ self.clients.claim();
 });
-
-self.addEventListener("fetch", evento => {
-  evento.respondWith(
-    caches.match(evento.request).then(respuesta => {
-      return respuesta || fetch(evento.request).then(red => {
-        const copia = red.clone();
-        caches.open(CACHE).then(cache => cache.put(evento.request, copia));
-        return red;
-      });
-    }).catch(() => caches.match("./index.html"))
-  );
+self.addEventListener("fetch",e=>{
+ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
 });
 ```
