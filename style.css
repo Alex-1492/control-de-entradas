@@ -1,0 +1,110 @@
+{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eef2ff;
+  color: #172033;
+  font-family: Arial, sans-serif;
+}
+
+.contenedor {
+  width: min(900px, 94%);
+  margin: 24px auto;
+}
+
+h1 {
+  text-align: center;
+  color: #1d4ed8;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 16px 0;
+  box-shadow: 0 3px 12px #00000018;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 12px 0;
+  font-weight: bold;
+}
+
+input, select, button {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.botones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.secundario {
+  background: #475569;
+}
+
+.peligro {
+  background: #dc2626;
+}
+
+.mensaje {
+  min-height: 20px;
+  color: #166534;
+  font-weight: bold;
+}
+
+small {
+  color: #64748b;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+
+th, td {
+  padding: 9px 6px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.vacio {
+  color: #64748b;
+}
