@@ -49,3 +49,62 @@ $("pdf").onclick=()=>{
 
 if("serviceWorker"in navigator)navigator.serviceWorker.register("service-worker.js");
 actualizar();
+$("voz").onclick = () => {
+  const Reconocimiento =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!Reconocimiento) {
+    mensaje("mensaje", "Usá Google Chrome para registrar por voz.", true);
+    return;
+  }
+
+  const reconocimiento = new Reconocimiento();
+  reconocimiento.lang = "es-AR";
+  reconocimiento.continuous = false;
+  reconocimiento.interimResults = false;
+
+  mensaje("mensaje", "Escuchando… hablá ahora.");
+
+  reconocimiento.onresult = evento => {
+    const texto = evento.results[0][0].transcript;
+    interpretarVoz(texto);
+  };
+
+  reconocimiento.onerror = () => {
+    mensaje("mensaje", "No pude reconocer la voz. Revisá el permiso del micrófono.", true);
+  };
+
+  reconocimiento.start();
+};
+
+function interpretarVoz(texto) {
+  const t = texto.toLowerCase();
+
+  $("nombre").value = texto
+    .replace(/departamento|depto|piso|salió|salio|volvió|volvio|visita|residente/gi, "")
+    .trim();
+
+  const piso = texto.match(/(?:departamento|depto|piso)\s*([a-z0-9-]+)/i);
+  if (piso) $("departamento").value = piso[1];
+
+  $("tipo").value = t.includes("visita") ? "visita" : "residente";
+  $("evento").value =
+    t.includes("volvió") || t.includes("volvio") ? "volvió" : "salió";
+
+  mensaje("mensaje", "Revisá los datos y tocá Guardar movimiento.");
+}
+$("voz").addEventListener("click", function () {
+  const Reconocimiento =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!Reconocimiento) {
+    mensaje("mensaje", "Usá Google Chrome para usar el micrófono.", true);
+    return;
+  }
+
+  const reconocimiento = new Reconocimiento();
+  reconocimiento.lang = "es-AR";
+  reconocimiento.continuous = false;
+  reconocimiento.interimResults = false;
+
+  mensaje("mensaje", "Escuchando... hablá ahora.");
